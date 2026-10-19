@@ -190,6 +190,10 @@ _Avoid_: Checksum, signature
 A versioned bundle of content and scripts that adds to or patches the game, installed by a host on a world. The set of Packs in a world is fixed except at a save boundary.
 _Avoid_: Mod, plugin, add-on
 
+**Pack Lock**:
+The world's record of its enabled Content Packs: exact versions, hashes and load order, and the chosen winners where Packs conflict.
+_Avoid_: Mod list, load order file
+
 **Script-backed Part**:
 A Part whose behavior is written in a Content Pack's script instead of the core's code, but which dispatches exactly like any other Part.
 _Avoid_: Scripted component, behaviour script
