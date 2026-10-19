@@ -97,3 +97,21 @@ _Avoid_: Submit, confirm
 **Away**:
 A player state in which their Actor passes immediately, entered after repeated timeouts or a disconnect and left on any input.
 _Avoid_: AFK, idle
+
+### Input model
+
+**Command**:
+A player's intent, sent to the server and, if accepted, turned into an Action for their Actor. Not an Action itself.
+_Avoid_: Input, order, request
+
+**Turn Offer**:
+The server's invitation to an Actor's player to act at one due turn; a Command only counts if it answers the current one.
+_Avoid_: Prompt, turn token
+
+**Standing Order**:
+A multi-turn Command that supplies an Action each due turn until it completes or is interrupted.
+_Avoid_: Macro, auto-action
+
+**Refusal**:
+The server declining a Command up front, with a reason, because a precondition fails; it costs no time.
+_Avoid_: Failure (a failed attempt is an Action with Effects)
