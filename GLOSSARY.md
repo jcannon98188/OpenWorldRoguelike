@@ -223,3 +223,21 @@ _Avoid_: Prefab, tileset
 **Socket**:
 A slot on a Zone where a Zone Connection may attach, with a kind that decides what it can pair with.
 _Avoid_: Door, exit
+
+### Spatial services
+
+**Cell Shape**:
+The geometric form of a cell from a closed set, deciding which of its faces are open to which neighbours. The material decides the rest.
+_Avoid_: Tile type, voxel type
+
+**Visible Set**:
+The cells a viewer sees at one resolved turn, from geometry, light and sight radius.
+_Avoid_: FOV mask, line of sight
+
+**Light Level**:
+The integer brightness of a cell, from light sources and what blocks them. Whether a viewer sees a lit cell depends on their sight threshold.
+_Avoid_: Illumination, shadow map
+
+**Movement Profile**:
+The capabilities, size and costs of a mover that pathfinding plans for. A planned path is advice; the move itself is still checked when attempted.
+_Avoid_: Nav agent, mobility class
