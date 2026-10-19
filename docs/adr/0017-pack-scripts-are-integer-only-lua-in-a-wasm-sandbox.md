@@ -1,5 +1,7 @@
 # Pack scripts are integer-only Lua running in a Wasm sandbox
 
+> **Amended by [ADR-0020](0020-the-stack-is-a-rust-workspace.md):** the language is Rust, so Parts are Rust (an `enum` of built-ins plus a script variant) and the `Wasmtime` host is the native Rust crate, not a .NET binding. The design below is otherwise unchanged.
+
 Content Pack scripts (ADR-0015) are written in Lua and run on the server inside Wasmtime, through the `Wasmtime` .NET binding. The Lua interpreter is a first-party engine, compiled once to a WebAssembly module and shipped with the server; pack authors never build Wasm. Wasmtime is the sandbox: the engine module is linked only with the game's host imports, with no WASI, so a script can reach nothing the host did not hand it. Each call runs with a fuel budget (deterministic, never wall-clock epochs) and a hard memory cap, clamped by server policy over the Pack manifest's requested limits. Memory growth is limited to a fixed ceiling so success or failure is deterministic, and running out of fuel or memory aborts the call with a recorded error that is part of the simulation, so replay (ADR-0014) fails the same way.
 
 One language and one host serve every script entry point: Part handlers, generation stages (ADR-0012) and Elapse hooks (ADR-0009). They differ only in the host imports linked and in their budgets. Stages get large budgets, handlers small ones.

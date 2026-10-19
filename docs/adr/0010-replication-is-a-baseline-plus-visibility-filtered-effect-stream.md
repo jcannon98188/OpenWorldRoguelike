@@ -8,7 +8,7 @@ Every join, reconnect and Zone crossing starts from a fresh baseline of the curr
 
 The remembered map is character state owned by the server: a per-Chunk seen bitset of terrain, plus last-known `Reveal` snapshots of Entities with a cap, held in the character's save and sent in baselines. A client-owned memory was rejected because it is lost on a new device and cannot be validated.
 
-Client and server must run the same content: the handshake exchanges the world's ordered list of Content Packs, each with id, version and hash (ADR-0016), and a protocol version, and any mismatch refuses the connection and names the differing Pack. Presentation assets are not part of the hash. Effects and Commands are closed hierarchies with stable numeric type ids from one registry, shared by wire, save and replay formats, which are otherwise separate. The encoding (MemoryPack or hand-written writers) is a build-time benchmark, not an architecture decision.
+Client and server must run the same content: the handshake exchanges the world's ordered list of Content Packs, each with id, version and hash (ADR-0016), and a protocol version, and any mismatch refuses the connection and names the differing Pack. Presentation assets are not part of the hash. Effects and Commands are closed hierarchies with stable numeric type ids from one registry, shared by wire, save and replay formats, which are otherwise separate. The encoding (a serde-based binary format or hand-written writers) is a build-time benchmark, not an architecture decision.
 
 ## Consequences
 
