@@ -184,6 +184,16 @@ _Avoid_: Recording, demo
 The hashes recorded alongside a log: a chained hash of each Root Action's Effects, and a state hash at each epoch boundary and save point. A replay must reproduce it exactly.
 _Avoid_: Checksum, signature
 
+### Modding
+
+**Content Pack**:
+A versioned bundle of content and scripts that adds to or patches the game, installed by a host on a world. The set of Packs in a world is fixed except at a save boundary.
+_Avoid_: Mod, plugin, add-on
+
+**Script-backed Part**:
+A Part whose behavior is written in a Content Pack's script instead of the core's code, but which dispatches exactly like any other Part.
+_Avoid_: Scripted component, behaviour script
+
 ### Generation
 
 **World Plan**:
