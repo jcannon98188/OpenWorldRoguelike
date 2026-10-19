@@ -41,3 +41,37 @@ _Avoid_: Command (that is the player-facing input that may produce an Action), m
 **Effect**:
 A discrete, recorded change to world state produced by an Action. The only way state changes.
 _Avoid_: Mutation, delta, outcome
+
+### World model
+
+**Zone**:
+A bounded three-dimensional region of the world with its own clock and scheduler, and the unit of simulation, save and interest. Its extent is chosen by its designer, so zones differ in size; vertical levels are part of the zone, not separate zones.
+_Avoid_: Map, level, area, region
+
+**ZoneId**:
+The opaque, stable, never-reused handle of a Zone. Distinct from the key that tells world generation how to build the Zone the first time.
+_Avoid_: Zone coordinates, zone key
+
+**Chunk**:
+A fixed-size block of a Zone's cells, used to store, save and replicate the Zone in parts. Not a unit of simulation or addressing.
+_Avoid_: Tile block, sector, page
+
+**Active Region**:
+The part of a Zone that is currently simulated, because Actors are near it. The rest of the Zone is dormant.
+_Avoid_: Loaded area, hot zone
+
+**Zone Connection**:
+A declared link between a cell range in one Zone and a cell range in another, through which Entities move from Zone to Zone.
+_Avoid_: Portal, exit, transition
+
+**Anchor**:
+An Entity whose presence keeps part of a Zone in its Active Region. Every player is one; other Entities can be.
+_Avoid_: Keep-alive, spawner
+
+**Terrain**:
+The material and shape of each cell of a Zone: floor, wall, water, slope, ladder. Not an Entity; Entities stand on it.
+_Avoid_: Tile, map data
+
+**Peek**:
+A short, read-only view across a Zone Connection into the neighbouring Zone, marked as belonging to that Zone. It shows but cannot be acted on.
+_Avoid_: Preview, cross-zone vision
