@@ -151,3 +151,25 @@ _Avoid_: Spawn/despawn, show/hide
 **Remembered Map**:
 What a character has seen and last knew of the world, kept by the server as part of the character.
 _Avoid_: Fog of war, explored map
+
+### Characters
+
+**Character**:
+The Actor a player owns in a world, together with the records the world keeps about it. A player has at most one living Character.
+_Avoid_: Avatar, player (the player is the human)
+
+**Build**:
+The fully resolved record of a Character's creation choices, from which the same starting Character can be made again.
+_Avoid_: Template, class, loadout
+
+**Arrival Point**:
+A marker in a Zone where a new or returning Character may enter the world.
+_Avoid_: Spawn point, respawn
+
+**Stowed**:
+The state of a Character removed from its Zone while its player is gone, held until they return.
+_Avoid_: Logged out, despawned
+
+**Legacy**:
+The record kept of a Character after death or retirement: who they were and what they did.
+_Avoid_: Graveyard, history
