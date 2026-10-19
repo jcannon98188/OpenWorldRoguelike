@@ -241,3 +241,25 @@ _Avoid_: Illumination, shadow map
 **Movement Profile**:
 The capabilities, size and costs of a mover that pathfinding plans for. A planned path is advice; the move itself is still checked when attempted.
 _Avoid_: Nav agent, mobility class
+
+### Bodies and items
+
+**Body Part**:
+A limb or organ of an Actor's body, with its own health, flags and damage. A disabled part degrades what depends on it, and a severed part becomes an Entity.
+_Avoid_: Limb slot, hitbox
+
+**Downed**:
+The state of an Actor that cannot act because a vital part is disabled or its blood is critical. Not dead: it can be rescued.
+_Avoid_: Knocked out, incapacitated, dying
+
+**Blood**:
+An Actor's pool of life that drains from untreated wounds; running out kills a Downed Actor.
+_Avoid_: Bleed timer, health bar
+
+**Condition**:
+A timed effect on an Entity, such as poison, a buff or burning, defined by data and stacking under a declared policy.
+_Avoid_: Status effect, debuff, buff
+
+**Stat**:
+A named integer value of an Entity, worked out on demand from its base and everything that modifies it.
+_Avoid_: Attribute, property
