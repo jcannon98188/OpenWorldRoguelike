@@ -173,3 +173,25 @@ _Avoid_: Logged out, despawned
 **Legacy**:
 The record kept of a Character after death or retirement: who they were and what they did.
 _Avoid_: Graveyard, history
+
+### Generation
+
+**World Plan**:
+The finite map of a world made at creation: its Zones, their connections and roles, before any Zone's detail exists.
+_Avoid_: World map, seed map
+
+**Recipe**:
+The data definition of how a Zone is built: its extent and the ordered stages that fill it.
+_Avoid_: Generator, template
+
+**Layout**:
+A designer's coarse drawing of what goes where in a Zone, including where it connects to other Zones.
+_Avoid_: Floor plan
+
+**Sample**:
+A designer's patch of cells showing a style, which synthesis learns from.
+_Avoid_: Prefab, tileset
+
+**Socket**:
+A slot on a Zone where a Zone Connection may attach, with a kind that decides what it can pair with.
+_Avoid_: Door, exit
