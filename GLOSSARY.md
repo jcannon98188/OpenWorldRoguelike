@@ -174,6 +174,16 @@ _Avoid_: Logged out, despawned
 The record kept of a Character after death or retirement: who they were and what they did.
 _Avoid_: Graveyard, history
 
+### Verification
+
+**Replay Segment**:
+A replayable slice of a world's history: a starting point (genesis or a save snapshot), the command logs after it, and the Hash Trail to check against.
+_Avoid_: Recording, demo
+
+**Hash Trail**:
+The hashes recorded alongside a log: a chained hash of each Root Action's Effects, and a state hash at each epoch boundary and save point. A replay must reproduce it exactly.
+_Avoid_: Checksum, signature
+
 ### Generation
 
 **World Plan**:

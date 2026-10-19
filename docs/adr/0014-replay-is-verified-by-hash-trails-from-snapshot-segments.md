@@ -1,0 +1,19 @@
+# Replay is verified by hash trails over segments that start from snapshots
+
+A replay re-runs the simulation from a starting point plus the command log (ADR-0008) and is checked against a Hash Trail recorded when the log was produced: a rolling hash chained over each Root Action's Effects per Zone, plus a canonical state hash at every epoch boundary (ADR-0009) and at every save point. The first mismatch names the Zone, Tick and Root Action. The Effect hash catches wrong behavior; the state hash catches state that changed outside the Effect pipeline (ADR-0001).
+
+The state hash is computed over the persistence encoding, the same bytes the serializer writes for a save, so "save, load, hash" is tested to be stable and there is no second serialization path to drift. The encoding must therefore be byte-stable: sorted keys, no map-order dependence, no floating point in simulation state. This is a rule for every Part's serialized state.
+
+The world is persistent and runs for months, so a replay file is a Replay Segment, not a run from genesis. Its header names the start: either genesis (seed plus World Plan) or a save snapshot (a consistent set of Zone blobs, world tables and stateful RNG positions, ADR-0013). The header also carries the log-format version, RNG algorithm identity, runtime version, content-pack hash and World Clock; a replay refuses to run on any mismatch, as the handshake does (ADR-0010). The body is the per-Zone command logs and the world log of crossings and session events, with the recorded Effect hashes. The trailer holds the epoch-boundary state hashes and a final hash. A server keeps a rolling segment from each save for a configured number of days, so a bug report ships the last snapshot plus the log tail. Genesis segments serve tests and golden files.
+
+Replay drives the simulation directly, injecting logged Commands at their Ticks with no transport and no wall clock. The headless server runs with an in-memory `ITransport` and scripted or seeded-random bot clients that answer Turn Offers through the real client contract; a bot run produces logs, and replay verifies them. Any bot run, including disconnects, timeouts and mid-crossing quits, must replay to identical hashes.
+
+A serial Zone runner is built first behind the Zone-runner interface and is the oracle replay trusts. The threaded runner (ADR-0006) ships if a spike shows it produces identical hashes to the serial runner over thousands of seeded runs with injected delays and forced yields, and never deadlocks (the minimum Zone clock advances, or a stall reason is reported). The spike uses synthetic Actors, two to eight Zones in a cyclic graph, crossings near the Drift Window limit, and a stopped Zone and a parked Zone. Speedup is measured and reported but is not a gate.
+
+Considered: a final state hash only (a divergence says nothing about where it began), replaying through the full transport stack (replay would depend on session timing), and genesis-only replay (unusable for a long-lived world).
+
+## Consequences
+
+- The command log carries its log-format version; the segment header carries the rest. Changing the RNG, the hashing or the encoding is a format version bump.
+- A small set of golden replays is checked in, one per format version. A change either keeps them passing or bumps the version and regenerates them in the same commit.
+- Tests run in layers: unit (Parts, handlers, Refusals, scheduler order); contract vectors (RNG, serializer, and the Elapse fold versus any closed form, per Part, across seeds and gap lengths, ADR-0009); scenario (scripted bots on the headless server, written as C# builders); replay equivalence (a short seeded soak per pull request, a long one nightly); golden replays. The per-PR soak and golden replays block merge; the nightly soak reports only.
