@@ -198,6 +198,10 @@ _Avoid_: Mod list, load order file
 A Part whose behavior is written in a Content Pack's script instead of the core's code, but which dispatches exactly like any other Part.
 _Avoid_: Scripted component, behaviour script
 
+**Script Engine**:
+The first-party, integer-only Lua runtime, compiled to Wasm and run in Wasmtime, that executes every Content Pack script under per-call fuel and memory budgets.
+_Avoid_: Interpreter, VM
+
 ### Generation
 
 **World Plan**:
