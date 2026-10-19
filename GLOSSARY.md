@@ -115,3 +115,21 @@ _Avoid_: Macro, auto-action
 **Refusal**:
 The server declining a Command up front, with a reason, because a precondition fails; it costs no time.
 _Avoid_: Failure (a failed attempt is an Action with Effects)
+
+### Idle simulation
+
+**Elapse**:
+A Part's way of moving its state forward over time it was not simulated, producing ordinary Effects.
+_Avoid_: Fast-forward, offline tick
+
+**Epoch**:
+The fixed span of game time in which Elapse is applied; catch-up always covers whole epochs.
+_Avoid_: Era, period
+
+**Catch-up**:
+Bringing a lagging Chunk or Zone up to the World Clock before it is next simulated, by Elapse followed by a short stretch of real play.
+_Avoid_: Fast-forward, resync
+
+**Inbox**:
+The stamped arrivals and changes waiting for an Unloaded Zone, applied at their times when it next catches up.
+_Avoid_: Queue, mailbox
