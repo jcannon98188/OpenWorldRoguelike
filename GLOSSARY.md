@@ -263,3 +263,45 @@ _Avoid_: Status effect, debuff, buff
 **Stat**:
 A named integer value of an Entity, worked out on demand from its base and everything that modifies it.
 _Avoid_: Attribute, property
+
+### Minds and the coarse world
+
+**Mind**:
+The Part that decides an NPC Actor's Action when its turn is due, by scoring Goals.
+_Avoid_: Brain, AI controller
+
+**Goal**:
+A data-defined aim a Mind can pursue, with a score and a short behavior sequence that produces its Actions.
+_Avoid_: Task, state, behavior
+
+**Routine**:
+A time-of-day table that biases an NPC's Goals toward where and what it does at each hour.
+_Avoid_: Schedule, script
+
+**Noise**:
+A loudness released by an Effect that nearby Minds may hear.
+_Avoid_: Sound event
+
+**Faction**:
+A named group with standing toward other Factions and Characters, deciding who is hostile, wary, neutral or friendly.
+_Avoid_: Team, side
+
+**Group**:
+A roster of creatures travelling and acting as one in the coarse world layer, becoming real Entities only when it arrives in a Zone.
+_Avoid_: Squad, party (the party is the players)
+
+**Notable**:
+A named individual tracked by id across the coarse world layer and the Zones.
+_Avoid_: Unique, boss
+
+**Place**:
+A settlement or site with stocks and an owning Faction, known to the coarse world layer.
+_Avoid_: Location, town
+
+**World Event**:
+A notable happening in a Zone, reported to the coarse world layer at its next Epoch step.
+_Avoid_: Global event, trigger
+
+**Quest**:
+A data-defined set of states held by a party or Character that advances on World Events.
+_Avoid_: Mission, objective chain
