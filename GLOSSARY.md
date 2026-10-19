@@ -133,3 +133,21 @@ _Avoid_: Fast-forward, resync
 **Inbox**:
 The stamped arrivals and changes waiting for an Unloaded Zone, applied at their times when it next catches up.
 _Avoid_: Queue, mailbox
+
+### Replication
+
+**Baseline**:
+A snapshot of everything a client may see in its current interest set, taken between Root Actions, from which its stream of Effects continues.
+_Avoid_: Full sync, keyframe
+
+**Interest**:
+The set of Chunks a player is sent state for, because they are within what their character perceives.
+_Avoid_: Subscription, load area
+
+**Reveal / Conceal**:
+The server telling a client that an Entity has come into or gone out of what its character can see, with the visible state on reveal.
+_Avoid_: Spawn/despawn, show/hide
+
+**Remembered Map**:
+What a character has seen and last knew of the world, kept by the server as part of the character.
+_Avoid_: Fog of war, explored map
