@@ -75,3 +75,25 @@ _Avoid_: Tile, map data
 **Peek**:
 A short, read-only view across a Zone Connection into the neighbouring Zone, marked as belonging to that Zone. It shows but cannot be acted on.
 _Avoid_: Preview, cross-zone vision
+
+### Time model
+
+**Tick**:
+The integer unit of game time. A normal action costs 100 Ticks.
+_Avoid_: Turn, frame, step
+
+**World Clock**:
+The single monotonic game time of the world: the earliest clock among Zones holding a connected player. Idle Zones lag behind it.
+_Avoid_: Global time, server time
+
+**Drift Window**:
+How far a Zone's clock may run ahead of the World Clock before it must wait.
+_Avoid_: Lag tolerance, leash
+
+**Lock-in**:
+A player committing their Command for the Action that is due.
+_Avoid_: Submit, confirm
+
+**Away**:
+A player state in which their Actor passes immediately, entered after repeated timeouts or a disconnect and left on any input.
+_Avoid_: AFK, idle
