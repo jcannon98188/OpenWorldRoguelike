@@ -1,0 +1,43 @@
+# Open World Roguelike
+
+A server-authoritative, persistent-world, small-group co-op roguelike core, independent of any front end.
+
+## Language
+
+### Simulation model
+
+**Entity**:
+Anything in a zone with identity: a creature, item, door, fire, trap or projectile. Defined by a blueprint and a set of Parts.
+_Avoid_: Object, game object, thing
+
+**Actor**:
+An Entity that holds a Part giving it turns, so it can initiate Actions. A role, not a separate kind of Entity.
+_Avoid_: Agent, character (a character is the player-owned Actor)
+
+**Part**:
+A unit of behavior and state attached to an Entity that reacts to events. The Entity's capabilities are the sum of its Parts.
+_Avoid_: Component, trait, behaviour
+
+**Blueprint**:
+The data definition of an Entity: an identity, an optional parent Blueprint, and the Parts it is composed from with their parameters.
+_Avoid_: Prefab, template, archetype
+
+**EntityId**:
+The stable handle by which one Entity refers to another. It may fail to resolve if the target is unloaded or gone.
+_Avoid_: Reference, pointer
+
+**Event**:
+A notification dispatched to an Entity's Parts. Always one of three kinds: a Query (read a value), a Before (may veto or rewrite what is about to happen), or an After (react to what happened).
+_Avoid_: Message, signal, callback
+
+**Root Action**:
+The Action that starts a cascade; every Effect it triggers, directly or through reactions, belongs to it.
+_Avoid_: Transaction, turn
+
+**Action**:
+An immutable statement that an Actor attempts something, which resolves into Effects.
+_Avoid_: Command (that is the player-facing input that may produce an Action), move, turn
+
+**Effect**:
+A discrete, recorded change to world state produced by an Action. The only way state changes.
+_Avoid_: Mutation, delta, outcome
